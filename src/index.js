@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import AddUser from './Components/AddUser';
+import ReportPage from './Components/ReportPage';
+import './Styles/addUserstyle.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <AddUser /> */}
+    <ReportPage />
   </React.StrictMode>,
   document.getElementById('root')
 );
