@@ -3,50 +3,39 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Admindashboard from './Components/Admindashboard';
+import Testaddnew from './Components/Testaddnew';
+import Testviewall from './Components/Testviewall';
 import Editaccount from './Components/Editaccount';
 import Changepass from './Components/Changepass';
-import Admindashboard from './Components/Admindashboard';
-import { Container, Dropdown, Button } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-
+import Accountsettings from './Components/Accountsettings';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 ReactDOM.render(
 
   <React.StrictMode>
 
     <div>
-      <br/>
-    <Container>
-      <Button variant="secondary" href="/Components/Admindashboard">Link</Button> <Button type="button">Button</Button>{' '}
-    </Container>
-
-    <Container >
-    <br/>
-    <Router>
-
-      <Dropdown>    
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-            Account Settings
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu>
-            <Dropdown.Item as={Link} to={"/components/Editaccount"}>Edit Account</Dropdown.Item>
-            <Dropdown.Item as={Link} to={"/components/Changepass"}>Change Password</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-
-      <Routes>
-        <Route exact path="/components/admindashboard" element={<Admindashboard/>}/>
-        <Route exact path="/components/Editaccount" element={<Editaccount/>}/>
-        <Route exact path="/components/Changepass" element={<Changepass/>}/>
-      </Routes>
-      </Router>
-
+      
+      <Admindashboard />
+      
       <br/>
       <hr/>
       <br/>
 
-    </Container>
+      <Accountsettings />
+
+    <Router>
+        <Routes>
+            <Route exact path="/Components/Admindashboard" element={<Admindashboard/>}/>
+            <Route exact path="/Components/Editaccount" element={<Editaccount/>}/>
+            <Route exact path="/Components/Changepass" element={<Changepass/>}/>
+            <Route exact path="/Components/Testaddnew" element={<Testaddnew/>}/>
+            <Route exact path="/Components/Testviewall" element={<Testviewall/>}/>
+            <Route exact path="/Components/Accountsettings" element={<Accountsettings/>}/>
+        </Routes>
+    </Router>
+
           
     </div>
 

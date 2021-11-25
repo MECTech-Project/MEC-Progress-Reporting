@@ -1,14 +1,17 @@
 import React from 'react';
-import { Form, Row, Col, Button, Card } from 'react-bootstrap';
+import { Container, Form, Row, Col, Button, Card } from 'react-bootstrap';
 
 
 function Editaccount() {
     return (
 
-      <div>   
-      <br/>
-      <hr/>
+        <div>   
 
+        <br/>
+        <hr/>
+        <br/>
+
+        <Container>
             <Card body>
             <Form>
             <h2>Edit Account</h2>
@@ -39,6 +42,11 @@ function Editaccount() {
             </Button>
             </Form>
             </Card>
+        </Container>
+        
+        <br/>
+        <hr/>
+        <br/>
             
         </div>
    

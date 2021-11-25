@@ -1,12 +1,16 @@
 import React from 'react';
-import { Card, Form, Button } from 'react-bootstrap';
+import { Container, Card, Form, Button } from 'react-bootstrap';
 
 function Changepass() {
     return (
-            <div>   
-            <br/>
-            <hr/>
 
+        <div>      
+
+        <br/>
+        <hr/>
+        <br/>
+
+        <Container>
             <Card body>
             <Form>
                 <h2>Change Password</h2>
@@ -28,8 +32,13 @@ function Changepass() {
                 </Button>
             </Form>
             </Card>
+        </Container>   
+
+        <br/>
+        <hr/>
+        <br/>
             
-            </div>
+        </div>
 
     );
 
