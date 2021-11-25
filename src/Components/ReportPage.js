@@ -4,23 +4,27 @@ import "../App.css"
 import WorkTime from "./WorkTime"
 function ReportPage() {
     return (
+        
+
         <div className="plancards">
+        <h2 className="text-center pb-4">Report Page</h2>
+
         <Container>
-        <Col  xs={6} md={6} lg={6} >
-        <Card.Title>Did the plan go as planned ?</Card.Title>
+            <Col  xs={6} md={6} lg={6} >
+            <Card.Title>Did the plan go as planned ?</Card.Title>
         <br></br>
 
         {/*First Card*/}
         <Card>
-  <Card.Header>
-    <Nav variant="pills" defaultActiveKey="#first">
-    <Card.Title>Plan 1</Card.Title>
-    <div className='buttons'>
-    <Button  variant="primary">Yes</Button>
-    <Button className ="no" variant="primary">No</Button>
-    </div>
-    </Nav>
-  </Card.Header>
+    <Card.Header>
+        <Nav variant="pills" defaultActiveKey="#first">
+        <Card.Title>Plan 1</Card.Title>
+        <div className='buttons'>
+        <Button  variant="primary">Yes</Button>
+        <Button className ="no" variant="primary">No</Button>
+        </div>
+        </Nav>
+    </Card.Header>
   <Card.Body>
     <Card.Title>Please fill in the report for the plan</Card.Title>
     <Card.Text>

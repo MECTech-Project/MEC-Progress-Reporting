@@ -14,7 +14,7 @@ import Admindashboard from './Components/Admindashboard';
 import { Container, Dropdown, Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
-{/*}>>>>>>> 4bc6c8bdf7f0445c39c4de480e810fa09189f803*/}
+
 
 ReactDOM.render(
 
@@ -40,15 +40,15 @@ ReactDOM.render(
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-            <Dropdown.Item as={Link} to={"/components/Editaccount"}>Edit Account</Dropdown.Item>
-            <Dropdown.Item as={Link} to={"/components/Changepass"}>Change Password</Dropdown.Item>
+            <Dropdown.Item as={Link} to={"/Components/Editaccount"}>Edit Account</Dropdown.Item>
+            <Dropdown.Item as={Link} to={"/Components/Changepass"}>Change Password</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
 
       <Routes>
-        <Route exact path="/components/admindashboard" element={<Admindashboard/>}/>
-        <Route exact path="/components/Editaccount" element={<Editaccount/>}/>
-        <Route exact path="/components/Changepass" element={<Changepass/>}/>
+        <Route exact path="/Components/Admindashboard" element={<Admindashboard/>}/>
+        <Route exact path="/Components/Editaccount" element={<Editaccount/>}/>
+        <Route exact path="/Components/Changepass" element={<Changepass/>}/>
       </Routes>
       </Router>
 
