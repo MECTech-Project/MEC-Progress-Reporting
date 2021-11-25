@@ -1,0 +1,23 @@
+
+.card {
+  margin-bottom: 20px;
+}
+
+
+.container {
+    width: 95%;
+    max-width: 780px;
+    background: #fff;
+    border-radius: .5em;
+    box-shadow: 0 3px rgba(0,0,0, .1);
+    background: #040205;
+    color: #d20eec;
+    font-family: 'Roboto', sans-serif;
+    padding: 5em 5em;
+  }
+
+  .group {
+    padding: 50px 20px;
+    margin-bottom: 20px;
+    color:black;
+  } 
