@@ -3,22 +3,37 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Admindashboard from './Components/Admindashboard';
 import Testaddnew from './Components/Testaddnew';
 import Testviewall from './Components/Testviewall';
+
+// import AddUser from './Components/AddUser';
+import ReportPage from './Components/ReportPage';
+import './Styles/addUserstyle.css';
+
 import Editaccount from './Components/Editaccount';
 import Changepass from './Components/Changepass';
 import Accountsettings from './Components/Accountsettings';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+
 ReactDOM.render(
 
   <React.StrictMode>
 
+    {/* <AddUser /> */}
+    <ReportPage />
+
+
     <div>
+
       
       <Admindashboard />
-      
+    
+    <br/>
+
+
       <br/>
       <hr/>
       <br/>
