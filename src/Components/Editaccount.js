@@ -1,14 +1,10 @@
 import React from 'react';
-import { Container, Form, Row, Col, Button, Card } from 'react-bootstrap';
-
+import { Container, Form, Button, Card } from 'react-bootstrap';
 
 function Editaccount() {
     return (
-
         <div>   
 
-        <br/>
-        <hr/>
         <br/>
 
         <Container>
@@ -16,26 +12,23 @@ function Editaccount() {
             <Form>
             <h2>Edit Account</h2>
             <br/>
+ 
             <Form.Group className="mb-3" controlId="formGroupEmail">
                 <Form.Label>TreeHouse</Form.Label>
                 <Form.Control placeholder="Enter profile URL" />
             </Form.Group>
-            <Row className="mb-3">
-                <Form.Group as={Col} controlId="formGroupEmail">
+            <Form.Group className="mb-3" controlId="formGroupEmail">
                 <Form.Label>GitHub profile</Form.Label>
                 <Form.Control type="email" placeholder="github.com/username" />
-                </Form.Group>
-            </Row>
+            </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupEmail">
                 <Form.Label>freeCodeCamp</Form.Label>
                 <Form.Control placeholder="freecodecamp.org/username" />
             </Form.Group>
-            <Row className="mb-3">
-                <Form.Group as={Col} controlId="formGroupEmail">
+            <Form.Group className="mb-3" controlId="formGroupEmail">
                 <Form.Label>LinkedIn</Form.Label>
                 <Form.Control type="email" placeholder="linkedin.com/in/username" />
-                </Form.Group>
-            </Row>
+            </Form.Group>
 
             <Button variant="primary" type="submit">
                 Save changes
@@ -43,15 +36,11 @@ function Editaccount() {
             </Form>
             </Card>
         </Container>
-        
-        <br/>
-        <hr/>
+
         <br/>
             
-        </div>
-   
+        </div>   
    );
-
 }
 
 export default Editaccount;
