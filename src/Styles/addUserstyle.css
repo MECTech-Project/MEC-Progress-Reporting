@@ -4,3 +4,14 @@
 .no{
     margin-left: 40px !important;
 }
+
+.times{
+    margin-left: 400px;
+}
+
+.area{
+    width:500px;
+}
+.remove{
+    position: relative;
+}

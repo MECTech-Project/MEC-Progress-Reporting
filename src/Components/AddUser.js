@@ -10,7 +10,15 @@ function AddUser() {
     <Col  xs={6} md={6} lg={6} >
     <Card body>
         <Form>
-    <Form.Group className="formf" controlId="formBasicEmail">
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Full Name</Form.Label>
+        <Form.Control type="username" placeholder="Enter Name" />
+        <Form.Text className="text-muted">
+        </Form.Text>
+    </Form.Group>
+
+    <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" />
         <Form.Text className="text-muted">
