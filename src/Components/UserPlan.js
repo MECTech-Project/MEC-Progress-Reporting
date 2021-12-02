@@ -1,105 +1,84 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Stack, Button } from "react-bootstrap";
 import WorkTime from "./WorkTime";
+
 
 const initialList = [
     {
         plan: 1,
-    }
+        name: "task 1",
+        remove: true
+    },
+    {
+        plan: 2,
+        name: "task 2",
+        remove: true
 
+    },
+    {
+        plan: 3,
+        name: "task 3",
+        remove: true
+    }
 ];
 
-function UserPlan() {
-
+export default function App() {
+    const { register, handleSubmit } = useForm();
     const [lists, setList] = useState(initialList);
 
-    const [planText, setPlanText] = useState("")
-
-    const inputRef = useRef([])
-    // inputRef.current = []
-    function submit(e) {
-        console.log(inputRef.current.value)
-        // if (e && !inputRef.current.includes(e)) {
-        //     inputRef.current.push(e);
-        // }
-
-    }
+    const onSubmit = (data) => console.log(data);
 
     function handleAddPlan() {
-        setList([...lists, {
-            plan: lists.length + +1
-        }])
-    };
-    function handleRemove(plan) {
-        setList(lists.filter(list => list.plan !== plan))
-    };
-    const handlePlanChange = (e) => {
-        setPlanText(e.target.value);
+        setList([
+            ...lists,
+            {
+                plan: lists.length + +1,
+                name: `task ${lists.length + +1}`,
+                remove: false
+            }
+        ]);
     }
-    // const addtolist = (e) =>{
-    //     if(e && inputRef.current.includes(e)){
-    //         inputRef.current.push(e);
-    //     }
-    //     console.log(inputRef.current)
-    // }
 
+    function handleRemove(plan, remove) {
+        console.log(remove)
+        if ( remove === false ) {
 
-    const Component = () => {
+                console.log("baba")
+        setList(lists.filter((list) => list.plan !== plan))
+}
+    }
 
-        const [length, setLength] = useState(2);
-        const refs = useRef([React.createRef(), React.createRef()]);
-      
-        function updateLength({ target: { value }}) {
-          setLength(value);
-          refs.current = refs.current.splice(0, value);
-          for(let i = 0; i< value; i++) {
-            refs.current[i] = refs.current[i] || React.createRef();
-          }
-          refs.current = refs.current.map((item) => item || React.createRef());
-        }
-      
-        useEffect(() => {
-         refs.current[refs.current.length - 1].current.focus()
-        }, [length]);
-      
-        return (<>
-          <ul>
-          {refs.current.map((el, i) =>
-            <li key={i}><input ref={refs.current[i]} value={i} /></li>
-          )}
-        </ul>
-        <input value={refs.current.length} type="number" onChange={updateLength} />
-        </>)
-      }
+    console.log(lists);
 
+    const inputs = lists.map((list) => {
+
+        return (
+            <div key={list.plan}>
+                <Stack onSubmit={handleSubmit(onSubmit)} direction="horizontal" gap={3}>
+
+                <input
+                    className="me-auto"
+                    {...register(`${list.name}`, { required: true })}
+                    placeholder={`plan ${list.plan} ${list.name}`}
+                />
+                <div style={{ width: "140px" }}>
+                    <WorkTime />
+                </div>
+                <Button onClick={() => handleRemove(list.plan, list.remove)}>✖</Button>
+                </Stack>
+
+            </div>
+        );
+    });
 
     return (
         <div className="container">
             <h1 className="text-center">Fill your Plan</h1>
-            <ul >
-                {Component}
-                {/* {
-                    lists.map(list => (
-                        <li value={planText} onChange={handlePlanChange} key={list.plan}>
-                            <Stack direction="horizontal" gap={3}>
-                                <textarea ref={inputRef} type="text" className="me-auto" placeholder="Add your plan here..." />
-                                <div style={{ width: "140px" }}>
-                                    <WorkTime />
-                                </div>
-                                <div className="vr" />
-                                <Button variant="outline-light" onClick={() => handleRemove(list.plan)}>✖</Button>
-                            </Stack>
-                        </li>
-                    ))
-                } */}
-                {/* {renderPlan ? console.log("Submitted") : null } */}
-            </ul>
-            <Button variant="outline-light" onClick={handleAddPlan}> Add a Plan </Button>
+                {inputs}
+            <Button type="submit" >Submit</Button>
             <div className="vr" />
-            <Button onClick={submit} type="submit" variant="outline-light" > Submit </Button>
+            <Button onClick={handleAddPlan}>Add</Button>
         </div>
-    )
-
+    );
 }
-
-export default UserPlan

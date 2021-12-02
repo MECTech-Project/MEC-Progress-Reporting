@@ -12,23 +12,23 @@ const UsersList = [
         id: "user-3"
       },
       {
-        name: "Nareg Avedikian",
+        name: "Sandy Zwein",
         id: "user-4"
       },
       {
-        name: "Sandy Zwein",
+        name: "Jad Haddad",
         id: "user-5"
       },
       {
-        name: "Jad Haddad",
+        name: "Simon Resho",   
         id: "user-6"
       },
       {
-        name: "Simon Resho",   
+        name: "Rohan Misto",    
         id: "user-7"
       },
       {
-        name: "Rohan Misto",    
+        name: "Nareg Avedikian",
         id: "user-8"
       }
     
