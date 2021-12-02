@@ -1,66 +1,68 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
+import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-// import AddUser from './Components/AddUser';
-import ReportPage from './Components/ReportPage';
+// Welcome Page
+import SignIn from './Components/SignIn';
+
+// admin dashboard 
+import Admindashboard from './Components/Admindashboard';
+import UsersList from './Components/users';
+import UsersIcons from './Components/UsersIcons';
+import AddUser from './Components/AddUser';
 import './Styles/addUserstyle.css';
 
+// user dashboard
+import Accountsettings from './Components/Accountsettings';
 import Editaccount from './Components/Editaccount';
 import Changepass from './Components/Changepass';
-import Admindashboard from './Components/Admindashboard';
-import { Container, Dropdown, Button } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import WorkTime from './Components/WorkTime';
+import UserPlan from './Components/UserPlan';
+import ReportPage from './Components/ReportPage';
 
-
+// Random Quote Generator
+import AppRandQuote from './Components/RandQuoteGen/AppRandQuote';
 
 ReactDOM.render(
 
   <React.StrictMode>
-
-    {/* <AddUser /> */}
-    <ReportPage />
-
-
     <div>
-      <br/>
-    <Container>
-      <Button variant="secondary" href="/Components/Admindashboard">Link</Button> <Button type="button">Button</Button>{' '}
-    </Container>
-
-    <Container >
-    <br/>
     <Router>
 
-      <Dropdown>    
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-            Account Settings
-        </Dropdown.Toggle>
+      <Admindashboard/>
+    
+    <br/>
+    <br/>
 
-        <Dropdown.Menu>
-            <Dropdown.Item as={Link} to={"/Components/Editaccount"}>Edit Account</Dropdown.Item>
-            <Dropdown.Item as={Link} to={"/Components/Changepass"}>Change Password</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+      <AppRandQuote />
+
+      {/* <Accountsettings/> */}
 
       <Routes>
-        <Route exact path="/Components/Admindashboard" element={<Admindashboard/>}/>
-        <Route exact path="/Components/Editaccount" element={<Editaccount/>}/>
-        <Route exact path="/Components/Changepass" element={<Changepass/>}/>
+
+        {/* Welcome Page */}
+        <Route path="/signin" element={<SignIn/>}/>
+
+        {/* for the admin dashboard */}
+        <Route path="/admin-dashboard" element={<Admindashboard/>}/>
+        <Route path="/add-user" element={<AddUser/>}/>
+        <Route path="/account-settings" element={<Accountsettings/>}/>
+        <Route path="/edit-account" element={<Editaccount/>}/>
+        <Route path="/change-password" element={<Changepass/>}/>
+
+        {/* for the user dashboard */}
+        <Route path="/report-page" element={<ReportPage/>}/>
+        <Route path="/user-plan" element={<UserPlan/>}/>
+        <Route path="/users-list" element={<UsersList/>}/>
+        <Route path="/all-users" element={<UsersIcons/>}/>
+        <Route path="/work-time" element={<WorkTime/>}/>
+
       </Routes>
-      </Router>
-
-      <br/>
-      <hr/>
-      <br/>
-
-    </Container>
-          
+    </Router>
     </div>
-
-{/* >>>>>>> 4bc6c8bdf7f0445c39c4de480e810fa09189f803 */}
   </React.StrictMode>,
   document.getElementById('root')
 );
