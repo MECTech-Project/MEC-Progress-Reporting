@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import TimePicker from 'react-bootstrap-time-picker';
 
-function WorkTime() {
+function WorkTime({time = 0}) {
     
     
     const[planTime, setPlanTime]= useState({time: 0})
@@ -12,7 +12,8 @@ function WorkTime() {
     } 
     
      return <TimePicker onChange={(e) => handleTime(e)} format={24} 
-     initialValue={planTime.time} start="00:00" end="23:59" step={30} />
+     initialValue={planTime.time || time} start="00:00" end="23:59" step={30} />
+     
      
 
 
