@@ -11,7 +11,7 @@ const initialReports = [
     {   name:"george",
         id: "1",
         time: 3600
-
+    
     },
     {   name:"george1",
         id: "2",
@@ -24,12 +24,22 @@ const initialReports = [
     }
 ];
 
+//new map is placed over here 
+// function ReportPages(){
+// const [things, setThings] = useState (initialReports);
+// const [open, setOpen] = React.useState(false);
+// const[desc,setDesc]
+//}
+
+//map will end here
         
-// const plannumber=[
-//     {pnumber: 1},
-//     {pnumber: 2},
-//     {pnumber: 3},
-// ]
+const plannumber=[
+    {pnumber: 1},
+    {pnumber: 2},
+    {pnumber: 3},
+]
+
+
 
 function ReportPage() {
 
@@ -104,11 +114,14 @@ function ReportPage() {
         
         <div>
         <div><h2 className="text-center pb-4">Report Page</h2></div>
-        <Card.Title>Did you work on what was planned ?</Card.Title>
+        <Card.Title className="text-center pb-4">Did you work on what was planned ?</Card.Title>
         {
             users
         }
-        <Button className="bn" onClick={handleAddReports}>Add New Report</Button>
+        
+        <Row className="justify-content-md-center">
+        <Col xs={6} md={6} lg={6} > 
+        <Button onClick={handleAddReports}>Add New Report</Button></Col></Row>
         
         </div>
 
