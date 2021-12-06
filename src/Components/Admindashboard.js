@@ -1,8 +1,11 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Button, Navbar } from 'react-bootstrap';
-import logo from './logo.jpg';
-import { Link } from 'react-router-dom';
+import { Container, Button } from 'react-bootstrap';
+
+import AddUser from './AddUser';
+import UsersIcons from './UsersIcons';
+import AppRandQuote from './RandQuoteGen/AppRandQuote';
+import { render, cleanup } from '@testing-library/react';
 
 const date = new Date()
 const hours = date.getHours()
@@ -16,35 +19,32 @@ if (hours < 12) {
         timeOfDay = "Good Evening, Adam"
     }
 
+function clickNew(){
+    cleanup (<UsersIcons/>);
+    render (<AddUser/>)
+}
+
+function clickAll() {
+    cleanup (<AddUser/>);
+    render (<UsersIcons/>)
+}
+    
 function Admindashboard() {
     return (
         <div>
-            <Navbar bg="dark" variant="dark">
-                <Container>
-                <Navbar.Brand>
-                    <img
-                        alt="app logo"
-                        src={logo}
-                        width="30"
-                        height="30"
-                        className="d-inline-block align-top, img-circle"
-                    />{' '}
-                  MEC Reporting
-                </Navbar.Brand>
-                    <Button variant="primary" as={Link} to='signin' className="log-out">Log Out</Button>
-                </Container>
-            </Navbar>
-            <br/>
             <center>
                 <h2 id="greetings" className="animate__animated animate__zoomIn">{timeOfDay}</h2>
             </center>
             <br/>
             <center>
                 <Container>
-                    <Button variant="secondary" as={Link} to="/add-user">add new user</Button> {' '}
-                    <Button variant="secondary" as={Link} to="/all-users">view all users</Button> {' '}
+                    <Button variant="secondary" onClick={clickNew}>add new user</Button> {' '}
+                    <Button variant="secondary" onClick={clickAll}>view all users</Button> {' '}
                 </Container>
             </center>
+            <br/>
+            <br/>
+            <AppRandQuote />
         </div>
     )
 }
