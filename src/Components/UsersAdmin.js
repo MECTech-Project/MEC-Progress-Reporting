@@ -1,7 +1,7 @@
 import React from "react";
+import DateRangePicker from './DateRangePicker';
 // import UsersList from './users';
 import { Container, Row, Col } from 'react-bootstrap';
-import DatePicker from "./DatePicker";
 // import totalHours from "./TotalReportsHM";
 // import { ListGroup } from 'react-bootstrap';
 // import { Card } from 'react-bootstrap';
@@ -73,7 +73,7 @@ function UsersAdmin() {
 
     return (
         <div>
-                <center><h3>user's name</h3><br /></center>
+                {/* <center><h3>user's name</h3><br /></center> */}
                 {/* <Calendar /> */}
             <center>
                 <br />
@@ -89,7 +89,7 @@ function UsersAdmin() {
                             {/* <br /><br /> */}
                             {/* <div>total hours: {convertHMS(result)}</div> */}
                             <br /><br />
-                            <div>datePicker:  <DatePicker /></div>
+                            <div className="col-md-3">datePicker:<br/><br/><DateRangePicker/> </div>
 
                         </Col>
                     </Row>

@@ -1,11 +1,9 @@
 import React from 'react';
-import { Container, Navbar, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 
 
-//importing App logo
-import logo from './logo.jpg';
 
                 const date = new Date()
                 const hours = date.getHours()
@@ -24,21 +22,6 @@ import logo from './logo.jpg';
     function UserDashboard() {
         return (
             <div>
-                <Navbar bg="dark" variant="dark">
-                    <Container>
-                    <Navbar.Brand>
-                        <img
-                        alt=""
-                        src={logo}
-                        width="30"
-                        height="30"
-                        className="d-inline-block align-top, img-circle"
-                        />{' '}
-                    MEC Tech Progress
-                    </Navbar.Brand>
-                        <Button as={Link} to="/signin" variant="primary" className="log-out">Log Out</Button>
-                    </Container>
-                </Navbar>
                 <center><h2 id="greetings" className="animate__animated animate__zoomIn">{timeOfDay}</h2></center>
                 
                 <div className="mb-2 plan-report" >
@@ -59,35 +42,35 @@ import logo from './logo.jpg';
                     </div>
                     <ul className="sidebar-navigation">
                         <li>
-                        <a href="#" target="_blank" rel="noreferrer">
+                        <a href target="_blank" rel="noreferrer">
                             <i className="fa fa-home" aria-hidden="true"></i> GitHub
                         </a>
                         </li>
                         <li>
-                        <a href="#" target="_blank" rel="noreferrer">
+                        <a href target="_blank" rel="noreferrer">
                             <i className="fa fa-tachometer" aria-hidden="true"></i> FreeCodeCamp
                         </a>
                         </li>
                         <li>
-                        <a href="#" target="_blank" rel="noreferrer">
+                        <a href target="_blank" rel="noreferrer">
                             <i className="fa fa-users" aria-hidden="true"></i> TeamTreehouse
                         </a>
                         </li>
                         <li>
-                        <a href="#" target="_blank" rel="noreferrer">
+                        <a href target="_blank" rel="noreferrer">
                             <i className="fa fa-cog" aria-hidden="true"></i> Tech Typing Club
                         </a>
                         </li>
 
                         <li>
                         <Button variant="dark" as={Link} to="/change-password">
-                            <i className="fa fa-cog" aria-hidden="true"></i> Change Password
+                            <div className="fa fa-cog" aria-hidden="true"></div> Change Password
                         </Button>
                         </li>
 
                         <li>
                         <Button variant="dark" as={Link} to="/edit-account">
-                            <i className="fa fa-cog" aria-hidden="true"></i> Edit Account
+                            <div className="fa fa-cog" aria-hidden="true"></div> Edit Account
                         </Button>
                         </li>
 
