@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Button, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import logo from './logo.jpg';
 
 function NavBar() {
+
+    const [hide, setHide] = useState({
+        logButton: true
+    })
+    const hideLog = () => setHide({
+        logButton: false
+    })
+    console.log("log button:", hide.logButton === true )
+
     return (
         <div>
             <Navbar bg="dark" variant="dark">
@@ -19,11 +28,11 @@ function NavBar() {
                     />{' '}
                   MEC Reporting
                 </Navbar.Brand>
-                    <Button variant="primary" as={Link} to='/login' className="log-out">Log Out</Button>
+                {hide.logButton ? <Button variant="primary" onClick={hideLog} as={Link} to='/login'
+                        className="log-out">Log Out</Button> : null}
                 </Container>
             </Navbar>
         </div>
     )
 }
-
 export default NavBar;

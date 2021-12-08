@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Button } from 'react-bootstrap';
 
 import AddUser from './AddUser';
 import UsersIcons from './UsersIcons';
 import AppRandQuote from './RandQuoteGen/AppRandQuote';
-import { render, cleanup } from '@testing-library/react';
+import '../Styles/addUserstyle.css'
 
-const date = new Date()
-const hours = date.getHours()
-let timeOfDay
+function Admindashboard() {
 
-if (hours < 12) {
+    const date = new Date()
+    const hours = date.getHours()
+    let timeOfDay
+
+    if (hours < 12) {
         timeOfDay = "Good Morning, Adam"
     } else if (hours >= 12 && hours < 17) {
         timeOfDay = "Good Afternoon, Adam"
@@ -19,34 +21,44 @@ if (hours < 12) {
         timeOfDay = "Good Evening, Adam"
     }
 
-function clickNew(){
-    cleanup (<UsersIcons/>);
-    render (<AddUser/>)
-}
 
-function clickAll() {
-    cleanup (<AddUser/>);
-    render (<UsersIcons/>)
-}
-    
-function Admindashboard() {
+    const [showResults, setShowResults] = useState({
+        addUser: false,
+        UsersIcons: false,
+        AppRandQuote: true
+    })
+    const clickNew = () => setShowResults({
+        addUser: true,
+        UsersIcons: false,
+        AppRandQuote: false
+    })
+    const clickAll = () => setShowResults({
+        addUser: false,
+        UsersIcons: true,
+        AppRandQuote: false
+    })
+    console.log("random quote:", showResults.AppRandQuote === true)
+    console.log("add user:", showResults.addUser === true)
+    console.log("view all users:", showResults.UsersIcons === true)
+
     return (
         <div>
             <center>
                 <h2 id="greetings" className="animate__animated animate__zoomIn">{timeOfDay}</h2>
             </center>
-            <br/>
+            <br />
             <center>
                 <Container>
                     <Button variant="secondary" onClick={clickNew}>add new user</Button> {' '}
                     <Button variant="secondary" onClick={clickAll}>view all users</Button> {' '}
+                    <br />
+                    <br />
                 </Container>
             </center>
-            <br/>
-            <br/>
-            <AppRandQuote />
+                {showResults.addUser ? <AddUser /> : null}
+                {showResults.UsersIcons ? <UsersIcons /> : null}
+                {showResults.AppRandQuote ? <AppRandQuote /> : null}
         </div>
     )
 }
-
 export default Admindashboard;
