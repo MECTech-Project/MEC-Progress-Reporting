@@ -32,7 +32,6 @@ function UsersIcons() {
             </Card>
           </Col>
         ))}
-        );
       </div>
     </div>
   )

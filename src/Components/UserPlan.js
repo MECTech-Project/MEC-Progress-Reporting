@@ -24,7 +24,7 @@ const initialList = [
 ];
 
 export default function App() {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, resetField } = useForm();
     const [lists, setList] = useState(initialList);
 
     const onSubmit = (data) => console.log(data);
@@ -33,51 +33,75 @@ export default function App() {
         setList([
             ...lists,
             {
-                plan: lists.length + +1,
-                name: `task ${lists.length + +1}`,
+                plan: lists.length + 1,
+                name: `task ${lists.length + 1}`,
                 remove: false
             }
         ]);
+        console.log("lists", lists)
     }
 
-    function handleRemove(plan, remove) {
-        console.log(remove)
-        if ( remove === false ) {
+    function handleRemove(plan, remove, name) {              
+        if (remove === false) {
 
-                console.log("baba")
-        setList(lists.filter((list) => list.plan !== plan))
-}
+            let ifTrue = lists.filter((list) => list.remove === true);
+            console.log("ifTrue", ifTrue)
+            let ifFalse = lists.filter((list) => list.remove === false);
+            console.log("ifFalse", ifFalse)
+            let main = ifFalse.filter((list) => list.plan !== plan);
+
+            resetField(`${name}`)
+            console.log("name", name)
+            
+            let falseRemove = main.map((x, i) => {
+                return {
+                    plan: i + 4,
+                    name: `task ${i + 4}`,
+                    remove: false
+                }
+            })
+            
+            setList([
+                ...ifTrue, ...falseRemove
+            ]);
+            console.log("falseRemove", falseRemove)
+            
+        }
+        
     }
-
-    console.log(lists);
 
     const inputs = lists.map((list) => {
 
         return (
-            <div key={list.plan}>
-                <Stack onSubmit={handleSubmit(onSubmit)} direction="horizontal" gap={3}>
 
-                <input
-                    className="me-auto"
-                    {...register(`${list.name}`, { required: true })}
-                    placeholder={`plan ${list.plan} ${list.name}`}
-                />
-                <div style={{ width: "140px" }}>
-                    <WorkTime />
-                </div>
-                <Button onClick={() => handleRemove(list.plan, list.remove)}>✖</Button>
+            <div key={list.plan}>
+                <Stack direction="horizontal" gap={3}>
+                    <textarea
+                        className="me-auto"
+                        {...register(`${list.name}`, { required: true })}
+                        placeholder={`plan ${list.plan} ${list.name}`}
+                    />
+                    <div style={{ width: "80px" }}>
+                        <WorkTime />
+                    </div>
+                    <div className="vr" />
+                    <Button onClick={() => handleRemove(list.plan, list.remove, list.name)} >✖</Button>
                 </Stack>
 
             </div>
         );
     });
 
+    // useEffect(() => {
+    //     console.log("render")
+    //     lists.addEventListener('', handleRemove)
+    // },[])
+
     return (
         <div className="container">
             <h1 className="text-center">Fill your Plan</h1>
-                {inputs}
-            <Button type="submit" >Submit</Button>
-            <div className="vr" />
+            {inputs}
+            <Button type="submit" onClick={handleSubmit(onSubmit)}>Submit</Button>
             <Button onClick={handleAddPlan}>Add</Button>
         </div>
     );
