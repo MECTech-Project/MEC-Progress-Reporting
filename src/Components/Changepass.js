@@ -9,8 +9,8 @@ function Changepass() {
     mode: "onChange"
   });
   
-  const password = useRef({});
-  password.current = watch("password", "");
+  const new_password = useRef({});
+  new_password.current = watch("new_password", "");
   
   const onSubmit = (data) => console.log(data);
 
@@ -67,7 +67,7 @@ function Changepass() {
                               // error condition
                               {...register("confirm_password", {
                                 validate: value =>
-                                  value === password.current
+                                  value === new_password.current
                               })}
                             />
                             {/* error result */}
