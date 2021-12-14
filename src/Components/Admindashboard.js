@@ -44,13 +44,15 @@ function Admindashboard() {
     return (
         <div>
             <center>
+                <h2 id="greetings" className="animate__animated animate__zoomIn">{timeOfDay}</h2>
+            </center>
+            <br />
+            <center>
                 <Container>
-                    <h2 id="greetings" className="animate__animated animate__zoomIn">{timeOfDay}</h2>
-                <br />
                     <Button variant="secondary" onClick={clickNew}>add new user</Button> {' '}
                     <Button variant="secondary" onClick={clickAll}>view all users</Button> {' '}
-                <br />
-                <br />
+                    <br />
+                    <br />
                 </Container>
             </center>
                 {showResults.addUser ? <AddUser /> : null}

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Form, Button, Row, Col, Card, Container} from 'react-bootstrap';
 
+
 function AddUser() {
     return (
     
@@ -32,7 +33,7 @@ function AddUser() {
     <Form.Group className="mb-3" controlId="formBasicCheckbox">
         
     </Form.Group>
-    <Button variant="primary" type="submit">
+    <Button variant="primary" type="submit" onClick={()=> console.log("Submitted")}>
         Submit
     </Button>
     </Form>
