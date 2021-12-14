@@ -13,8 +13,21 @@
     width:500px;
 }
 .remove{
-    position: relative;
+    margin-left: 500px;
+    margin:15px;
+    
 }
-.bn{
+/* .bn{
     margin-left:auto;
+} */
+.area{
+    
+    width:100%;
+}
+.line{
+    padding: 4px;
+    color:black;
+}
+.subbutton{
+    margin-left: 15px;
 }
