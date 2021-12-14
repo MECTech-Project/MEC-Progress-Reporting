@@ -32,8 +32,8 @@ export default function UserPlan() {
     const { register, handleSubmit, resetField } = useForm();
     const [lists, setList] = useState(initialList);
 
-    const onSubmit = (data,event) => {
-        console.log(data, event);
+    const onSubmit = (data) => {
+        console.log(data);
     }
 
     function handleAddPlan() {
@@ -43,7 +43,7 @@ export default function UserPlan() {
                 id: lists.length + 1,
                 name: `task ${lists.length + 1}`,
                 remove: false,
-                // time: 0
+                time: 0
             }
         ]);
         console.log("lists", lists)
@@ -77,8 +77,8 @@ export default function UserPlan() {
         }
     }
 
-    function handleChange(event) {
-        console.log("e", event)
+    function handleChange(time) {
+        console.log("e", time)
     //     // let timing = lists.push({time:event})
     //     setList(lists => [...lists, {time:event}])
     }
@@ -91,14 +91,15 @@ export default function UserPlan() {
                 <Stack direction="horizontal" gap={3}>
                     <textarea
                         className="me-auto"
-                        {...register(`${list.name}`, { required: true })}
+                        {...register(`${list.name} , ${list.time}`, { required: true })}
                         placeholder={`Plan ${list.id} ${list.name}`}
                     />
                     <TimePickerComponent 
+                    style={{ width: "50px" }}
                     {...register(`${list.time}`, { required: true })}
                     placeholder={`time ${list.id}`}
                     format='HH:mm'
-                    onChange={(event)=> handleChange(event)}
+                    onChange={()=> handleChange(list.time)} 
                     >
                     </TimePickerComponent>
                     <div className="vr" />
@@ -113,7 +114,7 @@ export default function UserPlan() {
         <div className="container">
             <h1 className="text-center">Fill your plan</h1>
             {inputs}
-            <Button type="submit" onClick={handleSubmit(onSubmit)}>Submit</Button>
+            <Button type="submit" onClick={handleSubmit(onSubmit, handleChange)}>Submit</Button>
             <Button onClick={handleAddPlan}>Add</Button>
         </div>
     );
