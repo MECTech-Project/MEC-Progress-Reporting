@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Stack, Button } from "react-bootstrap";
-import { TimePickerComponent } from '@syncfusion/ej2-react-calendars';
 
 
 const initialList = [
@@ -9,20 +8,20 @@ const initialList = [
         id: 1,
         name: "task 1",
         remove: true,
-        time: 0
+        time: "time 1"
     },
     {
         id: 2,
         name: "task 2",
         remove: true,
-        time: 0
+        time: "time 2"
 
     },
     {
         id: 3,
         name: "task 3",
         remove: true,
-        time: 0
+        time: "time 3"
 
     }
 
@@ -43,7 +42,7 @@ export default function UserPlan() {
                 id: lists.length + 1,
                 name: `task ${lists.length + 1}`,
                 remove: false,
-                time: 0
+                time: `time ${lists.length + 1}`
             }
         ]);
         console.log("lists", lists)
@@ -77,11 +76,6 @@ export default function UserPlan() {
         }
     }
 
-    function handleChange(time) {
-        console.log("e", time)
-    //     // let timing = lists.push({time:event})
-    //     setList(lists => [...lists, {time:event}])
-    }
 
     const inputs = lists.map((list) => {
 
@@ -91,17 +85,15 @@ export default function UserPlan() {
                 <Stack direction="horizontal" gap={3}>
                     <textarea
                         className="me-auto"
-                        {...register(`${list.name} , ${list.time}`, { required: true })}
+                        {...register(`${list.name}`, { required: true })}
                         placeholder={`Plan ${list.id} ${list.name}`}
                     />
-                    <TimePickerComponent 
-                    style={{ width: "50px" }}
-                    {...register(`${list.time}`, { required: true })}
-                    placeholder={`time ${list.id}`}
-                    format='HH:mm'
-                    onChange={()=> handleChange(list.time)} 
-                    >
-                    </TimePickerComponent>
+
+                    <input type="time" id="appt" name="appt"
+                        min="09:00" max="18:00" required 
+                        {...register(`${list.time}`, { required: true })}
+                    />
+
                     <div className="vr" />
                     <Button onClick={() => handleRemove(list.id, list.remove, list.name)} >✖</Button>
                 </Stack>
@@ -114,7 +106,7 @@ export default function UserPlan() {
         <div className="container">
             <h1 className="text-center">Fill your plan</h1>
             {inputs}
-            <Button type="submit" onClick={handleSubmit(onSubmit, handleChange)}>Submit</Button>
+            <Button type="submit" onClick={handleSubmit(onSubmit)}>Submit</Button>
             <Button onClick={handleAddPlan}>Add</Button>
         </div>
     );
