@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Stack, Button } from "react-bootstrap";
+// import { TimePickerComponent } from '@syncfusion/ej2-react-calendars';
+// import TimePicker from 'react-time-picker';
+// import WorkTime from "./WorkTime";
+// import TimePicker from 'react-bootstrap-time-picker';
+
 
 
 const initialList = [
@@ -45,10 +50,9 @@ export default function UserPlan() {
                 time: `time ${lists.length + 1}`
             }
         ]);
-        console.log("lists", lists)
     }
 
-    function handleRemove(id, remove, name) {
+    function handleRemove(id, remove, name, time) {
         if (remove === false) {
 
             let ifTrue = lists.filter((list) => list.remove === true);
@@ -57,15 +61,15 @@ export default function UserPlan() {
             console.log("ifFalse", ifFalse)
             let main = ifFalse.filter((list) => list.id !== id);
 
-            resetField(`${name}`)
-            console.log("name", name)
+            resetField(`${name} ${time}`)
+            console.log("name", name, time)
 
             let falseRemove = main.map((x, i) => {
                 return {
                     id: i + 4,
                     name: `task ${i + 4}`,
                     remove: false,
-                    // time: lists.time
+                    time: lists.time
                 }
             })
 
@@ -76,23 +80,41 @@ export default function UserPlan() {
         }
     }
 
-
     const inputs = lists.map((list) => {
 
         return (
 
             <div key={list.id}>
-                <Stack direction="horizontal" gap={3}>
+                <Stack direction="horizontal" >
                     <textarea
                         className="me-auto"
                         {...register(`${list.name}`, { required: true })}
                         placeholder={`Plan ${list.id} ${list.name}`}
                     />
-
-                    <input type="time" id="appt" name="appt"
-                        min="09:00" max="18:00" required 
-                        {...register(`${list.time}`, { required: true })}
-                    />
+                    <div className="dropdown">
+                        <div >
+                        <select className="dropdown-content dropbtn" {...register(`${list.time}`, { required: true })} >
+                            <option value="00:00">00:00</option>
+                            <option value="00:15">00:15</option>
+                            <option value="00:30">00:30</option>
+                            <option value="01:00">01:00</option>
+                            <option value="01:30">01:30</option>
+                            <option value="02:00">02:00</option>
+                            <option value="02:30">02:30</option>
+                            <option value="03:00">03:00</option>
+                            <option value="03:30">03:30</option>
+                            <option value="04:00">04:00</option>
+                            <option value="04:30">04:30</option>
+                            <option value="05:00">05:00</option>
+                            <option value="05:30">05:30</option>
+                            <option value="06:00">06:00</option>
+                            <option value="06:30">06:30</option>
+                            <option value="07:00">07:00</option>
+                            <option value="07:30">07:30</option>
+                            <option value="08:00">08:00</option>
+                        </select >
+                        </div>
+                    </div>
 
                     <div className="vr" />
                     <Button onClick={() => handleRemove(list.id, list.remove, list.name)} >✖</Button>
