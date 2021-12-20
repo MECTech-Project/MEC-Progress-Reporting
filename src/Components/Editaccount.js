@@ -14,103 +14,49 @@ function Editaccount() {
         <div>
         <Container>
             <Row className="justify-content-md-center">
-                <Col  xs={6} md={6} lg={6} >
-                    <Card body>
-                        <Row>
-                        <Col md={{ span: 11, offset: 1 }}>
-                            <h4><strong>Edit Account</strong></h4>
-
-                            <Form>
-                                <Form.Group className="mb-1">
-                                    <Form.Label htmlFor="treeHouse">
-                                        TreeHouse
-                                    </Form.Label>
-                                    <Row>
-                                        <Col sm="9" >
-                                            <Form.Control
-                                                {...register("treeHouse")}
-                                                placeholder="Enter profile URL" />
-                                        </Col>
-                                        <Col>
-                                            <Button variant="primary" onClick={handleSubmit(onSubmit)} >
-                                                Save
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </Form.Group>
-                            </Form>
-                            
-
-                            <Form>
-                                <Form.Group className="mb-1">
-                                    <Form.Label htmlFor="gitHub">
-                                        GitHub profile
-                                    </Form.Label>
-                                    <Row>
-                                        <Col sm="9" >
-                                            <Form.Control
-                                                {...register("gitHub")}
-                                                placeholder="github.com/username" />
-                                        </Col>
-                                        <Col>
-                                            <Button variant="primary" onClick={handleSubmit(onSubmit)} >
-                                                Save
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </Form.Group>
-                            </Form>
-
-
-                            <Form>
-                                <Form.Group className="mb-1">
-                                    <Form.Label htmlFor="freeCodeCamp">
-                                        freeCodeCamp
-                                    </Form.Label>
-                                    <Row>
-                                        <Col sm="9" >
-                                            <Form.Control
-                                                {...register("freeCodeCamp")}
-                                                placeholder="freecodecamp.org/username" />
-                                        </Col>
-                                        <Col>
-                                            <Button variant="primary" onClick={handleSubmit(onSubmit)} >
-                                                Save
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </Form.Group>
-                            </Form>
-
-
-                            <Form>
-                                <Form.Group className="formf">
-                                    <Form.Label htmlFor="linkedIn">
-                                        LinkedIn
-                                    </Form.Label>
-                                    <Row>
-                                        <Col sm="9" >
-                                            <Form.Control
-                                                {...register("linkedIn")}
-                                                placeholder="linkedin.com/in/username" />
-                                        </Col>
-                                        <Col>
-                                            <Button variant="primary" onClick={handleSubmit(onSubmit)} >
-                                                Save
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </Form.Group>
-                            </Form>
-
-                        </Col>
-                        </Row>
-                    </Card>
+            <Col  xs={6} md={6} lg={6} >
+                <Card body>
+                <Col md={{ span: 9, offset: 1 }}>
+                    <Form>
+                        <h4><strong>Edit Account</strong></h4>
+                        <Form.Group className="mb-2">
+                            <Form.Label>TreeHouse</Form.Label>
+                            <Form.Control 
+                                {...register("treeHouse")} 
+                                placeholder="Enter profile URL" 
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-2">
+                            <Form.Label>GitHub profile</Form.Label>
+                            <Form.Control 
+                                {...register("gitHub")}
+                                placeholder="github.com/username"
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-2">
+                            <Form.Label>freeCodeCamp</Form.Label>
+                            <Form.Control
+                                {...register("freeCodeCamp")}
+                                placeholder="freecodecamp.org/username"
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>LinkedIn</Form.Label>
+                            <Form.Control
+                                {...register("linkedIn")}
+                                placeholder="linkedin.com/in/username"
+                            />
+                        </Form.Group>
+                        <Button variant="primary" onClick={handleSubmit(onSubmit)} >
+                            Save changes
+                        </Button>
+                    </Form>
                 </Col>
+                </Card>
+            </Col>
             </Row>
         </Container>
-        <br/>
         </div>   
-    );
+   );
 }
 export default Editaccount;
