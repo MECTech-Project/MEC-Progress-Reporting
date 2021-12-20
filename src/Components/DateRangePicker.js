@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { DateRangePickerComponent } from '@syncfusion/ej2-react-calendars';
 import '../Styles/DateRangePicker.css';
-
+// import DatePicker from 'react-datepicker';
+// import "react-datepicker/dist/react-datepicker.css";
+import { ListGroup, Card } from 'react-bootstrap';
+import plansData from './Plans';
 
 // showing before 5 days ago and the format on the date range picker.
 var today = new Date();
@@ -15,31 +18,20 @@ const initDate = `${BfiveDays} - ${today}`
 
 
 
-// Showing the content by filtering on console.log
-const dates = [
-    {
-        id: 1,
-        date: "2021-12-10",
-        name: "cake"
-    },
-    {
-        id:2,
-        date: "2021-12-15",
-        name:"chips"
-    },
-    {
-        id:3,
-        date: "2020-12-16",
-        name:"batata"
-    },
-]
+    
 
-const startDate = "2021-12-10";
-const endDate = "2021-12-16";
+let startDate = "2021-12-10";
+let endDate = "2021-12-16";
 
-const result = dates.filter(function(obj) {
-    return obj.date >= startDate && obj.date <= endDate;
-});
+// const result = plansData.filter(function(obj) {
+//     return obj.date >= startDate && obj.date <= endDate;
+// });
+
+// console.log(result)
+
+const input = startDate && endDate
+const inputTs = Date.parse(input);
+const result = plansData.filter(d => Date.parse(d.date) <= inputTs);
 
 console.log(result)
 
@@ -53,26 +45,90 @@ function WorkDate() {
         console.log(date);
     };
 
-    const RenderDates = () => {
-        return dates.map(date => {
-            return (
-                <h1>{dates.date}</h1>
-            )
-        })
+    // Mapping plansData (Cards)
+    let plans = plansData.map((plan) => {
+        return (
+                <div key={plan.id}>
+                <Card className="text-center" key={plan.id}>
+                <ListGroup.Item variant="primary">Date of:  </ListGroup.Item>
+                <ListGroup.Item variant="dark"><h4>{plan.task}</h4><center>{plan.plan}</center>
+                </ListGroup.Item>
+                <Card.Body>
+                    <Card.Text>
+                    {plan.report}
+                    </Card.Text>
+                </Card.Body>
+                <ListGroup.Item variant="dark"><center>{plan.plan}</center></ListGroup.Item>
+                <Card.Body>
+                    <Card.Text>
+                        {plan.report}
+                    </Card.Text>
+                </Card.Body>
+                <ListGroup.Item variant="dark"><center>{plan.plan}</center></ListGroup.Item>
+                <Card.Body>
+                    <Card.Text>
+                        {plan.report}.
+                    </Card.Text>
+                </Card.Body>
+                </Card>
+                
+                </div>
+        ) 
+    })
+       
+
+        return (
+            <div>
+            {/* date range picker component */}
+                    <DateRangePickerComponent placeholder="Enter Date Range"
+                        change={onChange}
+                        value={date}
+                        dateFormat="yyyy-MM-dd"
+                        /><br/>
+
+
+
+                    <div>date - {date}</div>
+
+                    <br/>{plans}<br/>
+            </div>
+                
+                )
     }
-
-    return (
-        <div>
-            <DateRangePickerComponent placeholder="Enter Date Range"
-                onChange={onChange}
-                value={date}
-                format = "dd-MM-yyyy" />
-                <RenderDates />
-                 
-            {/* {console.log(date)} */}
-
-        </div>
-    );
-}
-
+        
+       
+        
 export default WorkDate;
+
+
+
+
+        //     <div>
+        //     <DatePicker
+        //     selected={myPastDate}
+        //     onChange={onChange}
+        //     selectsStart
+        //     startDate={startDate}
+        //     endDate={endDate}
+        // /></div>
+        // <div>
+        // <DatePicker
+        //     selected={endDate}
+        //     onChange={(date) => setEndDate(date)}
+        //     selectsEnd
+        //     startDate={startDate}
+        //     endDate={endDate}
+        //     minDate={startDate}
+        // /></div>
+
+
+    // var myCurrentDate=new Date();
+    // var myPastDate=new Date(myCurrentDate);
+    // myPastDate.setDate(myPastDate.getDate() - 8);
+    // const [startDate, setStartDate] = useState(new Date());
+    // const [endDate, setEndDate] = useState(new Date());
+
+
+     // function clickHandler() {
+        //     console.log("Button was clicked")
+        // }
