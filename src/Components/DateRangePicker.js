@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DateRangePickerComponent } from '@syncfusion/ej2-react-calendars';
 import '../Styles/DateRangePicker.css';
 // import DatePicker from 'react-datepicker';
@@ -20,33 +20,35 @@ const initDate = `${BfiveDays} - ${today}`
 
     
 
-let startDate = "2021-12-10";
-let endDate = "2021-12-16";
+const startDate = "16/12/2021";
+const endDate = "21/12/2021";
 
-// const result = plansData.filter(function(obj) {
-//     return obj.date >= startDate && obj.date <= endDate;
-// });
-
-// console.log(result)
-
-const input = startDate && endDate
-const inputTs = Date.parse(input);
-const result = plansData.filter(d => Date.parse(d.date) <= inputTs);
+const result = plansData.filter(function(obj) {
+    return obj.date >= startDate && obj.date <= endDate;
+});
 
 console.log(result)
 
 
 function WorkDate() {
-    const [date, setDate] = useState([initDate]);
+    const [dates, setDates] = useState([initDate]);
+
 
     const onChange = date => {
         // setDate(date);
-        setDate(date.value);
-        console.log(date);
+        setDates(date);
+        console.log("date", dates);
+
     };
 
+    useEffect(() => {
+        console.log("date1", dates);
+        
+      
+    }, [dates])
+
     // Mapping plansData (Cards)
-    let plans = plansData.map((plan) => {
+    let plans = result.map((plan) => {
         return (
                 <div key={plan.id}>
                 <Card className="text-center" key={plan.id}>
@@ -71,7 +73,6 @@ function WorkDate() {
                     </Card.Text>
                 </Card.Body>
                 </Card>
-                
                 </div>
         ) 
     })
@@ -81,14 +82,12 @@ function WorkDate() {
             <div>
             {/* date range picker component */}
                     <DateRangePickerComponent placeholder="Enter Date Range"
-                        change={onChange}
-                        value={date}
+                        onChange={onChange}
+                        value={dates}
                         dateFormat="yyyy-MM-dd"
                         /><br/>
 
 
-
-                    <div>date - {date}</div>
 
                     <br/>{plans}<br/>
             </div>
@@ -99,36 +98,3 @@ function WorkDate() {
        
         
 export default WorkDate;
-
-
-
-
-        //     <div>
-        //     <DatePicker
-        //     selected={myPastDate}
-        //     onChange={onChange}
-        //     selectsStart
-        //     startDate={startDate}
-        //     endDate={endDate}
-        // /></div>
-        // <div>
-        // <DatePicker
-        //     selected={endDate}
-        //     onChange={(date) => setEndDate(date)}
-        //     selectsEnd
-        //     startDate={startDate}
-        //     endDate={endDate}
-        //     minDate={startDate}
-        // /></div>
-
-
-    // var myCurrentDate=new Date();
-    // var myPastDate=new Date(myCurrentDate);
-    // myPastDate.setDate(myPastDate.getDate() - 8);
-    // const [startDate, setStartDate] = useState(new Date());
-    // const [endDate, setEndDate] = useState(new Date());
-
-
-     // function clickHandler() {
-        //     console.log("Button was clicked")
-        // }
