@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Stack, Button } from "react-bootstrap";
-// import { TimePickerComponent } from '@syncfusion/ej2-react-calendars';
-// import TimePicker from 'react-time-picker';
-// import WorkTime from "./WorkTime";
-// import TimePicker from 'react-bootstrap-time-picker';
-
 
 
 const initialList = [
@@ -37,7 +32,22 @@ export default function UserPlan() {
     const [lists, setList] = useState(initialList);
 
     const onSubmit = (data) => {
-        console.log(data);
+    //     let cleanData = [];
+    //     for(const [key, value] of Object.entries(data)) {
+    //         const number = parseInt(key.charAt(key.length-1))-1
+    //         if (!cleanData[number]) {
+    //             cleanData.push([value]);
+    //         } else {
+    //             cleanData[number].push(value); 
+    //         }
+    //     }
+    //     console.log(`data`,cleanData);
+    for (let i = 0; i < 2; i++) {
+        const element = "me";
+        for(const [key, value] of Object.entries(data))
+        console.log("from for", {[key]: value})
+        
+    }
     }
 
     function handleAddPlan() {
@@ -64,12 +74,12 @@ export default function UserPlan() {
             resetField(`${name} ${time}`)
             console.log("name", name, time)
 
-            let falseRemove = main.map((x, i) => {
+            let falseRemove = main.map((e, i) => {
                 return {
                     id: i + 4,
                     name: `task ${i + 4}`,
                     remove: false,
-                    time: lists.time
+                    time: e.time
                 }
             })
 
@@ -81,12 +91,12 @@ export default function UserPlan() {
     }
 
     const inputs = lists.map((list) => {
-
         return (
 
             <div key={list.id}>
                 <Stack direction="horizontal" >
                     <textarea
+                        type="text"
                         className="me-auto"
                         {...register(`${list.name}`, { required: true })}
                         placeholder={`Plan ${list.id} ${list.name}`}
@@ -94,7 +104,7 @@ export default function UserPlan() {
                     <div className="dropdown">
                         <div >
                         <select className="dropdown-content dropbtn" {...register(`${list.time}`, { required: true })} >
-                            <option value="00:00">00:00</option>
+                            <option />
                             <option value="00:15">00:15</option>
                             <option value="00:30">00:30</option>
                             <option value="01:00">01:00</option>
