@@ -57,10 +57,11 @@ function WorkDate() {
     return (
       <div key={plan.id}>
         <Card className="text-center" key={plan.id}>
-          <ListGroup.Item variant="primary">Date of: </ListGroup.Item>
+          <ListGroup.Item variant="primary">Date: {plan.date}</ListGroup.Item>
           <ListGroup.Item variant="dark">
             <h4>{plan.task}</h4>
-            <center>{plan.plan}</center>
+            <center>{plan.plan}
+            </center>
           </ListGroup.Item>
           <Card.Body>
             <Card.Text>{plan.report}</Card.Text>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useForm, useFieldArray, useWatch } from "react-hook-form";
 // import { whatever } from "react-bootstrap";
 
@@ -14,22 +14,22 @@ const Total = ({ control }) => {
   const sec = parseInt(total, 10); // convert total to number if it's string
   let hours   = Math.floor(sec / 3600); // get hours
   let minutes = Math.floor((sec - (hours * 3600)) / 60); // get minutes
-  // let seconds = sec - (hours * 3600) - (minutes * 60); //  get seconds
   // add 0 if timeValue < 10; Example: 2 => 02
   if (hours   < 10) {hours   = "0"+hours;}
   if (minutes < 10) {minutes = "0"+minutes;}
-  // if (seconds < 10) {seconds = "0"+seconds;}
   return `Total Time = ${hours}:${minutes}` 
 };
 
 function UserPlan() {
 
+  const [counter, setCounter] = useState(4)
+
   const { register, control, handleSubmit } = useForm({
     defaultValues: {
       plan: [
-        { task: "", time: 0 },
-        { task: "", time: 0 },
-        { task: "", time: 0 }
+        { id:1, task: "", time: 0 },
+        { id:2, task: "", time: 0 },
+        { id:3, task: "", time: 0 }
       ]
     }
   });
@@ -39,6 +39,7 @@ function UserPlan() {
     remove,
   } = useFieldArray({
     control,
+    keyName: 'key',
     name: "plan"
   });
 
@@ -54,16 +55,18 @@ function UserPlan() {
         <div>
           {fields.map((item, index) => {
             return (
-              <div key={item.id}>
+              <div key={item.key}>
                 <textarea placeholder="task"
                   {...register(`plan.${index}.task`, { required: true })} />
 
                 <select
-                 {...register(`plan.${index}.time`, {
-                  required: true,
-                  valueAsNumber: true
-                })} >
-                  {/* <option /> */}
+                  {...register(`plan.${index}.time`, {
+                  valueAsNumber: true,
+                  validate: value =>
+                      value !== 0
+                  })} >
+
+                  <option value="0">00:00</option>
                   <option value="900">00:15</option>
                   <option value="1800">00:30</option>
                   <option value="3600">01:00</option>
@@ -97,7 +100,10 @@ function UserPlan() {
         <section>
           <button
             type="button"
-            onClick= {() => append({ task: "", time: 0 })}>
+            onClick= {() => {
+              append({ id: counter, task: "", time: 0 })
+              setCounter(counter + 1)
+            }}>
             add
           </button>
         </section>

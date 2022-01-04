@@ -1,76 +1,131 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 
+import AppRandQuote from './RandQuoteGen/AppRandQuote';
+import ReportPage from './ReportPage';
+import UserPlan from './UserPlan';
+import Changepass from './Changepass';
+import EditAccount from './Editaccount';
 
-
-                const date = new Date()
-                const hours = date.getHours()
-                let timeOfDay
-
-                if (hours < 12) {
-                timeOfDay = "Good Morning, user"
-                } else if (hours >= 12 && hours < 17) {
-                    timeOfDay = "Good Afternoon, user"
-                } else {
-                    timeOfDay = "Good Evening, user"
-                }
-
-                
 
     function UserDashboard() {
+
+        const date = new Date()
+        const hours = date.getHours()
+        let timeOfDay
+
+        if (hours < 12) {
+        timeOfDay = "Good Morning, user"
+        } else if (hours >= 12 && hours < 17) {
+            timeOfDay = "Good Afternoon, user"
+        } else {
+            timeOfDay = "Good Evening, user"
+        }
+
+        const [showResults, setShowResults] = useState({
+            WritePlan: false,
+            WriteReport: false,
+            ChangePass: false,
+            EditAccount: false,
+            AppRandQuote: true
+        })
+        const clickPlan = () => setShowResults({
+            WritePlan: true,
+            WriteReport: false,
+            ChangePass: false,
+            EditAccount: false,
+            AppRandQuote: false
+        })
+        const clickReport = () => setShowResults({
+            WritePlan: false,
+            WriteReport: true,
+            ChangePass: false,
+            EditAccount: false,
+            AppRandQuote: false
+        })
+        const clickPass = () => setShowResults({
+            WritePlan: false,
+            WriteReport: false,
+            ChangePass: true,
+            EditAccount: false,
+            AppRandQuote: false
+        })
+        const clickAccount = () => setShowResults({
+            WritePlan: false,
+            WriteReport: false,
+            ChangePass: false,
+            EditAccount: true,
+            AppRandQuote: false
+        })
+        console.log("random quote:", showResults.AppRandQuote === true)
+        console.log("WritePlan:", showResults.WritePlan === true)
+        console.log("WriteReport:", showResults.WriteReport === true)
+        console.log("WriteReport:", showResults.ChangePass === true)
+        console.log("WriteReport:", showResults.EditAccount === true)
+
+
+
         return (
             <div>
-                <center><h2 id="greetings" className="animate__animated animate__zoomIn">{timeOfDay}</h2></center>
-                
-                <div className="mb-2 plan-report" >
-                    <Button as={Link} to="/plan" variant="primary" size="lg">
-                    Write Your Plan
-                    </Button>{' '}
-                
-                    <Button as={Link} to="/report" variant="primary" size="lg">
-                    Write Your Report
-                    </Button>{' '}
-                </div>
+                <center>
+                    <h2 id="greetings" className="animate__animated animate__zoomIn">{timeOfDay}</h2>
+                </center>
+                <br />
+                <center>
+                    <Container>
+                        <Button variant="secondary" onClick={clickPlan}>add new user</Button> {' '}
+                        <Button variant="secondary" onClick={clickReport}>view all users</Button> {' '}
+                        <br />
+                        <br />
+                    </Container>
+                </center>
+                {showResults.WritePlan ? <UserPlan /> : null}
+                {showResults.WriteReport ? <ReportPage /> : null}
+                {showResults.AppRandQuote ? <AppRandQuote /> : null}
+                {showResults.ChangePass ? <Changepass /> : null}
+                {showResults.EditAccount ? <EditAccount /> : null}
 
-                {/* Sidebar */}
 
+
+            {/* Sidebar */}
+            
                 <div className="sidebar-container">
                     <div className="sidebar-logo">
                         username
                     </div>
                     <ul className="sidebar-navigation">
                         <li>
-                        <a href target="_blank" rel="noreferrer">
+                        <Button href target="_blank" rel="noreferrer">
                             <i className="fa fa-home" aria-hidden="true"></i> GitHub
-                        </a>
+                        </Button>
                         </li>
                         <li>
-                        <a href target="_blank" rel="noreferrer">
+                        <Button href target="_blank" rel="noreferrer">
                             <i className="fa fa-tachometer" aria-hidden="true"></i> FreeCodeCamp
-                        </a>
+                        </Button>
                         </li>
                         <li>
-                        <a href target="_blank" rel="noreferrer">
+                        <Button href target="_blank" rel="noreferrer">
                             <i className="fa fa-users" aria-hidden="true"></i> TeamTreehouse
-                        </a>
+                        </Button>
                         </li>
                         <li>
-                        <a href target="_blank" rel="noreferrer">
+                        <Button href target="_blank" rel="noreferrer">
                             <i className="fa fa-cog" aria-hidden="true"></i> Tech Typing Club
-                        </a>
-                        </li>
-
-                        <li>
-                        <Button variant="dark" as={Link} to="/change-password">
-                            <div className="fa fa-cog" aria-hidden="true"></div> Change Password
                         </Button>
                         </li>
 
                         <li>
-                        <Button variant="dark" as={Link} to="/edit-account">
-                            <div className="fa fa-cog" aria-hidden="true"></div> Edit Account
+                        <Button onClick={clickPass}>
+                            <i className="fa fa-tachometer" aria-hidden="true"></i> Change Password
+                        </Button>
+                        </li>
+
+                        <li>
+                        <Button onClick={clickAccount}>
+                            <i className="fa fa-tachometer" aria-hidden="true"></i> Edit Account
                         </Button>
                         </li>
 
