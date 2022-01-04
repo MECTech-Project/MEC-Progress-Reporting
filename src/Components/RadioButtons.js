@@ -17,9 +17,9 @@ function RadioButtons() {
         <div className="App">
             <center>
             <br/><br/>
-            <input type="radio" name="option" value="yes" onChange={handleChange}/>Yes
+            <input type="radio" name="option" value="yes" onChange={handleChange}/>{value}
             <br/><br/>
-            <input type="radio" name="option" value="no" onChange={handleChange}/>No
+            <input type="radio" name="option" value="no" onChange={handleChange}/>{value}
             <h1>{option}</h1>
 
             <Form onSubmit={handleSubmit}>
