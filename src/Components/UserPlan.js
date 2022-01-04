@@ -7,16 +7,16 @@ const Total = ({ control }) => {
     name: "plan",
     control
   });
-  const total = formValues.reduce(
+  const totalT = formValues.reduce(
     (acc, current) => acc + (current.time || 0),
     0
   );
-  const sec = parseInt(total, 10); // convert total to number if it's string
-  let hours   = Math.floor(sec / 3600); // get hours
+  const sec = parseInt(totalT, 10); // convert totalT to number if it's string
+  let hours = Math.floor(sec / 3600); // get hours
   let minutes = Math.floor((sec - (hours * 3600)) / 60); // get minutes
   // add 0 if timeValue < 10; Example: 2 => 02
-  if (hours   < 10) {hours   = "0"+hours;}
-  if (minutes < 10) {minutes = "0"+minutes;}
+  if (hours < 10) {hours = "0" + hours;}
+  if (minutes < 10) {minutes = "0" + minutes;}
   return `Total Time = ${hours}:${minutes}` 
 };
 
@@ -27,9 +27,9 @@ function UserPlan() {
   const { register, control, handleSubmit } = useForm({
     defaultValues: {
       plan: [
-        { id:1, task: "", time: 0 },
-        { id:2, task: "", time: 0 },
-        { id:3, task: "", time: 0 }
+        { id: 1, task: "", time: 0 },
+        { id: 2, task: "", time: 0 },
+        { id: 3, task: "", time: 0 }
       ]
     }
   });

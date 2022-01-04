@@ -1,179 +1,123 @@
-import React, { useState } from 'react'
-import { Card, Nav, Button, Col, Row } from 'react-bootstrap';
-import "../App.css"
-import WorkTime from "./WorkTime";
+import React, {useState} from "react";
+import { useForm, useFieldArray, useWatch } from "react-hook-form";
+// import { Card, Nav, Button, Col, Row } from 'react-bootstrap';
 
+const Total = ({ control }) => {
+  const formValues = useWatch({
+    name: "plan",
+    control
+  });
+  const totalT = formValues.reduce(
+    (acc, current) => acc + (current.time || 0),
+    0
+  );
+  const sec = parseInt(totalT, 10); // convert totalT to number if it's string
+  let hours   = Math.floor(sec / 3600); // get hours
+  let minutes = Math.floor((sec - (hours * 3600)) / 60); // get minutes
+  // add 0 if timeValue < 10; Example: 2 => 02
+  if (hours   < 10) {hours   = "0"+hours;}
+  if (minutes < 10) {minutes = "0"+minutes;}
+  return `Total Time = ${hours}:${minutes}` 
+};
 
-
-
-// This is the arrray of the first function where the plans are already filled 
-
-const initialReports = [
-    {
-        id: "1",
-        name: "george 1",
-        time: 3600
-
-    },
-    {
-        id: "2",
-        name: "george 2",
-        time: 3600
-
-    },
-    {
-        id: "3",
-        name: "george 3",
-        time: 7200
-    }
-];
-// The first array ends here
-
-
-// This is the array of the second function where the user need to input a plan and a report
-const newReport = [];
-// The second array ends
-
-
-// This is the function that will produce the new report that needs to be filled with a plan and report
 function ReportPage() {
 
-    const [addedPlan, setaddedPlan] = useState(newReport)
-    function handleNewPlan() {
-        setaddedPlan([...addedPlan, {
-            id: addedPlan.length + 1,
-            
+    const [counter, setCounter] = useState(4)
 
-
-        }])
+  const { register, control, handleSubmit } = useForm({
+    defaultValues: {
+      plan: [
+        { id: 1, task: "task taken from plan", report: "", time: 10800 },
+        { id: 2, task: "task taken from plan", report: "", time: 10800 },
+        { id: 3, task: "task taken from plan", report: "", time: 7200 }
+      ]
     }
-    function handleRemoveReports(id) {
-        // console.log("hhh")
-        setaddedPlan(addedPlan.filter(repo => repo.id !== id))
+  });
+  const {
+    fields,
+    append,
+    remove,
+  } = useFieldArray({
+    control,
+    keyName: 'key',
+    name: "plan"
+  });
 
-    }
-    
-        let plans = addedPlan.map((user) => {
-        console.log(user)
-        //This is the return for the second part where the user needs to input his new plan a the report with it aswell
-        return (
-            <div>
-                <Row className="justify-content-md-center">
-                    <Col xs={6} md={6} lg={6} >
-                        <Card>
-                        <Card.Header>
-                        <Card.Title>Did you complete your plans ?</Card.Title>
-                        <Nav variant="pills" defaultActiveKey="#first">
-                                    
-                                    <div className='buttons'>
-                                        <Button variant="primary" onClick={() => console.log("Clicked Yes")}>Yes</Button>
-                                        <Button className="no" variant="danger" onClick={() => console.log("Clicked No")} >No</Button>
-                                    </div>
-                        </Nav>
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
-                        </Card.Header>
-                            <textarea className="p" type="text" placeholder="Type in the new plan please" />
-                            <Card.Body>
-                                <textarea type="text" placeholder="Please type your report here" />
-                                <Button variant="danger" className="remove" onClick={() => handleRemoveReports(user.id)}>✖</Button>
-                                
-                                <div style={{ width: '80px' }}>
-                                    <WorkTime time={user.time} />
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
-        );
-
-        });
-
-    const [reports, setReports] = useState(initialReports)
-
-    function handleAddReports() {
-        setReports([...reports, {
-            id: reports.length + 1,
-            name: `george ${reports.length + 1}`,
-            time: 3600
-            
-        }])
-    }
-    // function handleRemoveReports(id) {
-    //     // console.log("hhh")
-    //     setReports(reports.filter(repo => repo.id !== id))
-
-    // }
-
-    let users = reports.map((user) => {
-        console.log(user)
-        // This return is for the map of the already saved plans where the user only adds what he did without a plan
-        return (
-
-            <div>
-
-
-
-                <Row className="justify-content-md-center">
-                    <Col xs={6} md={6} lg={6} >
-                        <Card >
-
-                            <Card.Header>
-                                <Nav variant="pills" defaultActiveKey="#first">
-                                    <Card.Title>{user.name}</Card.Title>
-                                    <div className='buttons'>
-                                        <Button variant="primary" onClick={() => console.log("Clicked Yes")}>Yes</Button>
-                                        <Button className="no" variant="danger" onClick={() => console.log("Clicked No")} >No</Button>
-                                    </div>
-                                </Nav>
-                            </Card.Header>
-                            <Card.Body>
-                                <textarea className="area" type="text" id="inputreport" placeholder="Type in what you did here" />
-
-                                {/* <Button variant="danger" className="remove" onClick={() => handleRemoveReports(user.id)}>✖</Button> */}
-                                
-
-                                <div style={{ width: '80px' }}>
-                                    <WorkTime time={user.time} />
-                                </div>
-
-                            </Card.Body>
-
-                        </Card>
-
-                        <hr className="line"/>
-                        {/* <div>{user.name}</div>
-               <div>{user.id}</div> */}
-                    </Col>
-                </Row>
-            </div>
-        );
-    });
-
-    //This return is for the main function that only asks the user to add a report for the plan he already filled in the plan page
-    return (
+  return (
+    <center>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <h1> Fill your report </h1>
 
         <div>
-            <div><h2 className="text-center pb-4">Report Page</h2></div>
-            <Card.Title className="text-center pb-4">Did you work on what was planned ?</Card.Title>
-            {
-                users
-            }
-            {plans}
-            
+          {fields.map((item, index) => {
+            return (
+              <div key={item.key}>
+                <div>
+                    <textarea placeholder="task"
+                  {...register(`plan.${index}.task`, { required: true })} />
+                </div>
 
-            <Row className="justify-content-md-center">
-                <Col xs={6} md={6} lg={6} >
-                    <Button onClick={handleNewPlan}>Add New Report</Button>
-                    <Button className="subbutton" variant="primary" type="submit" >
-                    Submit
-                </Button></Col></Row>
-                    
 
+                <textarea placeholder="report"
+                  {...register(`plan.${index}.report`, { required: true })} />
+
+                <select
+                  {...register(`plan.${index}.time`, {
+                    valueAsNumber: true,
+                    validate: value =>
+                        value !== 0
+                  })} >
+                
+                  <option value="0">00:00</option>
+                  <option value="900">00:15</option>
+                  <option value="1800">00:30</option>
+                  <option value="3600">01:00</option>
+                  <option value="5400">01:30</option>
+                  <option value="7200">02:00</option>
+                  <option value="9000">02:30</option>
+                  <option value="10800">03:00</option>
+                  <option value="12600">03:30</option>
+                  <option value="14400">04:00</option>
+                  <option value="16200">04:30</option>
+                  <option value="18000">05:00</option>
+                  <option value="19800">05:30</option>
+                  <option value="21600">06:00</option>
+                  <option value="23400">06:30</option>
+                  <option value="25200">07:00</option>
+                  <option value="27000">07:30</option>
+                  <option value="28800">08:00</option>
+                </select >
+
+                <button type="button" onClick={() => index > 2 ? remove(index) : null}>
+                  Delete
+                </button>
+              </div>
+
+            );
+          })}
         </div>
 
-    
-    )
+        <Total control={control} />
+
+        <section>
+          <button
+            type="button"
+            onClick={() => {
+              append({ id: counter,  task: "", report: "", time: 0 })
+              setCounter(counter + 1)
+            }}>
+            add
+          </button>
+        </section>
+
+        <button type="submit" > Submit </button>
+      </form>
+    </center>
+  );
 }
 
-export default ReportPage
+export default ReportPage;
