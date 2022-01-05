@@ -60,7 +60,7 @@ function WorkDate() {
           <ListGroup.Item variant="primary">Date: {plan.date}</ListGroup.Item>
           <ListGroup.Item variant="dark">
             <h4>{plan.task}</h4>
-            <center>{plan.plan}
+            <center>{plan.plan} {plan.yes ? <div style={{color: "green"}}> yes I have finished the work </div> : <div style={{color: "red"}}>"No I couldn't"</div>}
             </center>
           </ListGroup.Item>
           <Card.Body>
