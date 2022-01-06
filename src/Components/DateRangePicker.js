@@ -15,6 +15,18 @@ function WorkDate() {
   const [startDate, setStartDate] = useState([]);
   const [endDate, setEndDate] = useState([]);
 
+function convertHMS(value) {
+    const sec = parseInt(value, 10); // convert value to number if it's string
+    let hours   = Math.floor(sec / 3600); // get hours
+    let minutes = Math.floor((sec - (hours * 3600)) / 60); // get minutes
+    // let seconds = sec - (hours * 3600) - (minutes * 60); //  get seconds
+    // add 0 if value < 10; Example: 2 => 02
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    // if (seconds < 10) {seconds = "0"+seconds;}
+    return `${hours}:${minutes}` 
+}
+
   useEffect(() => {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, "0");
@@ -60,24 +72,28 @@ function WorkDate() {
           <ListGroup.Item variant="primary">Date: {plan.date}</ListGroup.Item>
           <ListGroup.Item variant="dark">
             <h4>{plan.task}</h4>
-            <center>{plan.plan} {plan.yes ? <div style={{color: "green"}}> yes I have finished the work </div> : <div style={{color: "red"}}>"No I couldn't"</div>}
+            <center>{plan.plan} {plan.completed ? <div style={{color: "green"}}> yes I have finished the work </div> : <div style={{color: "red"}}>"No I couldn't"</div>}
             </center>
           </ListGroup.Item>
           <Card.Body>
-            <Card.Text>{plan.report}</Card.Text>
+            <Card.Text>{plan.report}<br/>
+            ({convertHMS(plan.time1)})Hrs </Card.Text>
           </Card.Body>
           <ListGroup.Item variant="dark">
             <center>{plan.plan}</center>
           </ListGroup.Item>
           <Card.Body>
-            <Card.Text>{plan.report}</Card.Text>
+            <Card.Text>{plan.report}<br/>
+            ({convertHMS(plan.time2)})Hrs </Card.Text>
           </Card.Body>
           <ListGroup.Item variant="dark">
             <center>{plan.plan}</center>
           </ListGroup.Item>
           <Card.Body>
-            <Card.Text>{plan.report}.</Card.Text>
+            <Card.Text>{plan.report}<br/>
+            ({convertHMS(plan.time3)})Hrs </Card.Text>
           </Card.Body>
+          <div>{convertHMS((plan.time1 + plan.time2 + plan.time3))}</div>
         </Card>
       </div>
     );
