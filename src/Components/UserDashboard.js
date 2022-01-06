@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 
 import AppRandQuote from './RandQuoteGen/AppRandQuote';
@@ -75,8 +75,8 @@ import EditAccount from './Editaccount';
                 <br />
                 <center>
                     <Container>
-                        <Button variant="secondary" onClick={clickPlan}>add new user</Button> {' '}
-                        <Button variant="secondary" onClick={clickReport}>view all users</Button> {' '}
+                        <Button variant="secondary" onClick={clickPlan}>Write your plan</Button> {' '}
+                        <Button variant="secondary" onClick={clickReport}>Write your report</Button> {' '}
                         <br />
                         <br />
                     </Container>
