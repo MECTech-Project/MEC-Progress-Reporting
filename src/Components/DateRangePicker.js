@@ -68,32 +68,35 @@ function convertHMS(value) {
   let plan = result.map((plan) => {
     return (
       <div key={plan.id}>
-        <Card className="text-center" key={plan.id}>
+        <Card className="text-center .col-lg-$" key={plan.id}>
           <ListGroup.Item variant="primary">Date: {plan.date}</ListGroup.Item>
           <ListGroup.Item variant="dark">
             <h4>{plan.task}</h4>
-            <center>{plan.plan} {plan.completed ? <div style={{color: "green"}}> yes I have finished the work </div> : <div style={{color: "red"}}>"No I couldn't"</div>}
+            <center>
+              {plan.plan1}
             </center>
           </ListGroup.Item>
-          <Card.Body>
-            <Card.Text>{plan.report}<br/>
-            ({convertHMS(plan.time1)})Hrs </Card.Text>
-          </Card.Body>
-          <ListGroup.Item variant="dark">
-            <center>{plan.plan}</center>
+          <ListGroup.Item>
+              {plan.report1}{plan.completed1 ? <div style={{color: "green"}}> yes I have finished the work </div> : <div style={{color: "red"}}>"No I couldn't"</div>}<br/>
+            ({convertHMS(plan.time1)})Hrs
           </ListGroup.Item>
-          <Card.Body>
-            <Card.Text>{plan.report}<br/>
-            ({convertHMS(plan.time2)})Hrs </Card.Text>
-          </Card.Body>
           <ListGroup.Item variant="dark">
-            <center>{plan.plan}</center>
+            <center>{plan.plan2}</center>
           </ListGroup.Item>
-          <Card.Body>
-            <Card.Text>{plan.report}<br/>
-            ({convertHMS(plan.time3)})Hrs </Card.Text>
-          </Card.Body>
-          <div>{convertHMS((plan.time1 + plan.time2 + plan.time3))}</div>
+          <ListGroup.Item>
+            {plan.report2}
+            {plan.completed2 ? <div style={{color: "green"}}> yes I have finished the work </div> : <div style={{color: "red"}}>"No I couldn't"</div>}<br/>
+            ({convertHMS(plan.time2)})Hrs
+          </ListGroup.Item>
+          <ListGroup.Item variant="dark">
+            <center>{plan.plan3}</center>
+          </ListGroup.Item>
+          <ListGroup.Item>
+            {plan.report3}
+            {plan.completed3 ? <div style={{color: "green"}}> yes I have finished the work </div> : <div style={{color: "red"}}>"No I couldn't"</div>}<br/>
+            ({convertHMS(plan.time3)})Hrs
+          </ListGroup.Item>
+          <ListGroup.Item variant="dark">{convertHMS((plan.time1 + plan.time2 + plan.time3))} Hrs</ListGroup.Item>
         </Card>
       </div>
     );
