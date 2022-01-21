@@ -37,9 +37,9 @@ function Admindashboard() {
         UsersIcons: true,
         AppRandQuote: false
     })
-    console.log("random quote:", showResults.AppRandQuote === true)
-    console.log("add user:", showResults.addUser === true)
-    console.log("view all users:", showResults.UsersIcons === true)
+    console.log("random quote:", showResults.AppRandQuote)
+    console.log("add user:", showResults.addUser)
+    console.log("view all users:", showResults.UsersIcons)
 
     return (
         <div>
@@ -55,9 +55,9 @@ function Admindashboard() {
                     <br />
                 </Container>
             </center>
-                {showResults.addUser ? <AddUser /> : null}
-                {showResults.UsersIcons ? <UsersIcons /> : null}
-                {showResults.AppRandQuote ? <AppRandQuote /> : null}
+            {showResults.addUser ? <AddUser /> : null}
+            {showResults.UsersIcons ? <UsersIcons /> : null}
+            {showResults.AppRandQuote ? <AppRandQuote /> : null}
         </div>
     )
 }

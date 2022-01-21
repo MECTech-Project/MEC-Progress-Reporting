@@ -11,7 +11,7 @@ const ConditionalInput = ({ control, index, item }) => {
       control={control}
       name={`plan.${index}.completed`}
       render={({ item }) =>
-        value?.[index]?.completed === false ? <option value="0">00:00</option> : null
+        !value?.[index]?.completed ? <option value="0">00:00</option> : null
       }
       defaultValue={item.completed}
     />

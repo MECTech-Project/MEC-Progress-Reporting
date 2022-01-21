@@ -6,15 +6,29 @@ import Axios from "axios";
 
 function UsersIcons() {
 
+  // incomplete
   const [listOfUsers, setListOfUsers] = useState([]);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
-    Axios.get("http://localhost:5000/getUsers").then((response) => {
+    Axios.get("http://localhost:3001/getUsers").then((response) => {
       setListOfUsers(response.data);
     });
   }, []);
 
-  
+
+        // incomplete
+  // const deleteUser = () => {
+  //   Axios.delete("http://localhost:5000/deleteUser", {
+  //     name,
+  //   }).then((response) => {
+  //     console.log("success")
+  //   });
+  // };
+
+        // incomplete
   // function handleDeleteUser(id) {
   //   setDeleted(deleted.filter(user => user.id !== id))
   //   console.log(" deleted")
@@ -26,12 +40,13 @@ function UsersIcons() {
     UsersIcons: true,
     UsersAdmin: false
   })
+  // incomplete
   const clickUser = () => setShowResults({
     UsersIcons: false,
     UsersAdmin: true
   })
-  console.log("UsersIcons:", showResults.UsersIcons === true)
-  console.log("UsersAdmin:", showResults.UsersAdmin === true)
+  console.log("UsersIcons:", showResults.UsersIcons)
+  console.log("UsersAdmin:", showResults.UsersAdmin)
 
   return (
     <div className="container">
@@ -44,9 +59,9 @@ function UsersIcons() {
               <Col xs={6} md={4} lg={4} key={user.id}>
                 <Card border="dark" style={{ backgroundColor: '#c097c5' }}>
                   <Card.Body className="text-center">
-                    <Card.Title>{user.name}</Card.Title>
+                    <Card.Title>{user.userId}. {user.firstName}</Card.Title>
                     <hr />
-                    <Button variant="dark" onClick={clickUser}>View User</Button>
+                    <Button variant="dark">View User</Button>
                     <hr />
                     <Button variant="dark"> Delete User </Button>
                   </Card.Body>
