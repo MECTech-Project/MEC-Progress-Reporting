@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import SignIn from './Components/SignIn';
+import LogIn from './Components/LogIn';
 import NavBar from './Components/NavBar';
 import Admindashboard from './Components/Admindashboard';
 import UserDashboard from './Components/UserDashboard';
@@ -18,9 +18,9 @@ ReactDOM.render(
         <NavBar />
 
         <Routes>
-          <Route path="/login" element={<SignIn/>}/>
-          <Route path="/admin" element={<Admindashboard/>}/>
-          <Route path="/user" element={<UserDashboard/>}/>
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/admin" element={<Admindashboard />} />
+          <Route path="/user" element={<UserDashboard />} />
         </Routes>
       </Router>
     </div>

@@ -7,6 +7,8 @@ function AddUser() {
     // temporary
     const [userId, setUserId] = useState("");
 
+    const [userType, setUserType,] = useState("");
+
     const [listOfUsers, setListOfUsers] = useState([]);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -16,6 +18,7 @@ function AddUser() {
     const createUser = () => {
         Axios.post("http://localhost:3001/createUser", {
             userId,
+            userType,
             firstName,
             lastName,
             email,
@@ -25,6 +28,7 @@ function AddUser() {
                 ...listOfUsers,
                 {
                     userId,
+                    userType,
                     firstName,
                     lastName,
                     email,
@@ -50,6 +54,21 @@ function AddUser() {
                                     }}
                                 />
                                 <Form.Group className="mb-2">
+                                    <Form.Label>Select user type</Form.Label>
+                                    {" "}
+                                    <select
+                                        required={true}
+                                        onChange={(event) => {
+                                            setUserType(event.target.value);
+                                        }}
+                                    >
+                                        <option></option>
+                                        <option value="intern">intern</option>
+                                        <option value="admin">admin</option>
+                                    </select>
+                                </Form.Group>
+
+                                <Form.Group className="mb-2">
                                     <Form.Label>Name</Form.Label>
                                     <Form.Control className="mb-2"
                                         type="text"
@@ -71,7 +90,7 @@ function AddUser() {
                                     <Form.Label>Email</Form.Label>
                                     <Form.Control
                                         type="email"
-                                        placeholder="whatever@whatever.whatever"
+                                        placeholder="name@email.com"
                                         onChange={(event) => {
                                             setEmail(event.target.value);
                                         }}

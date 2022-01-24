@@ -14,8 +14,7 @@ mongoose.connect(
     "mongodb+srv://makeyourguess:xKiiLdwECEYWr9Zi@cluster0.txzcl.mongodb.net/mec-reports?retryWrites=true&w=majority"
 );
 
-
-    // old way
+// old way
 // app.post("/createUser", async (req, res) => {
 //     const user = req.body;
 //     const newUser = new UserModel(user);
@@ -23,7 +22,6 @@ mongoose.connect(
 
 //     res.json(user)
 // });
-
 
 app.post('/createUser', async (req, res) => {
     console.log(req.body)
@@ -33,6 +31,7 @@ app.post('/createUser', async (req, res) => {
         const newPassword = await bcrypt.hash(req.body.password, 10)
         await UserModel.create({
             userId: req.body.userId,
+            userType: req.body.userType,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
@@ -44,7 +43,7 @@ app.post('/createUser', async (req, res) => {
     }
 })
 
-    // old way
+// old way
 // app.post('/api/login', async (req, res) => {
 //     const user = await UserModel.findOne({
 //         email: req.body.email,
@@ -85,17 +84,17 @@ app.post('/api/login', async (req, res) => {
     }
 })
 
-    // not functional yet
-// app.delete("/deleteUser", (req, res) => {
-//     const user = req.body;
-//     UserModel.deleteOne(user, (err, result) => {
-//         if (err) {
-//             res.json(err)
-//         } else {
-//             res.json(result)
-//         }
-//     })
-// })
+// not functional yet
+app.delete("/deleteUser", (req, res) => {
+    const user = req.body;
+    UserModel.deleteOne(user, (err, result) => {
+        if (err) {
+            res.json(err)
+        } else {
+            res.json(result)
+        }
+    })
+})
 
 app.get("/getUsers", (req, res) => {
     UserModel.find({}, (err, result) => {

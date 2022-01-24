@@ -7,6 +7,11 @@ const UserSchema = new mongoose.Schema(
       // required: true,
       unique: true,
     },
+    userType: {
+      // here specify if admin or intern
+      type: String,
+      required: true,
+    },
     firstName: {
       type: String,
       required: true
@@ -24,12 +29,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
       minlength: 5,
-    },
-    // userType: {
-            // here specify if admin or regular user
-    //   type: String,
-    //   required: true,
-    // }
+    }
   },
 );
 

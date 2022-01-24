@@ -11,6 +11,7 @@ function UsersIcons() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userId, setUserId,] = useState("");
 
   useEffect(() => {
     Axios.get("http://localhost:3001/getUsers").then((response) => {
@@ -19,16 +20,17 @@ function UsersIcons() {
   }, []);
 
 
-        // incomplete
-  // const deleteUser = () => {
-  //   Axios.delete("http://localhost:5000/deleteUser", {
-  //     name,
-  //   }).then((response) => {
-  //     console.log("success")
-  //   });
-  // };
+  // incomplete
+  const deleteUser = () => {
+    Axios.delete("http://localhost:3001/deleteUser", {
+      // userId,
+    }).then((response) => {
+      setListOfUsers()
+      console.log("success")
+    });
+  };
 
-        // incomplete
+  // incomplete
   // function handleDeleteUser(id) {
   //   setDeleted(deleted.filter(user => user.id !== id))
   //   console.log(" deleted")
@@ -59,11 +61,11 @@ function UsersIcons() {
               <Col xs={6} md={4} lg={4} key={user.id}>
                 <Card border="dark" style={{ backgroundColor: '#c097c5' }}>
                   <Card.Body className="text-center">
-                    <Card.Title>{user.userId}. {user.firstName}</Card.Title>
+                    <Card.Title>{user.userId}. {user.firstName} {user.lastName}</Card.Title>
                     <hr />
                     <Button variant="dark">View User</Button>
                     <hr />
-                    <Button variant="dark"> Delete User </Button>
+                    <Button onClick={deleteUser} variant="dark"> Delete User </Button>
                   </Card.Body>
                 </Card>
               </Col>
