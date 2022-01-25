@@ -1,17 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col, Card, Container } from 'react-bootstrap';
-// import Axios from "axios";
+import Axios from "axios";
 
 function LogIn() {
 
-    // incomplete
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [listOfUsers, setListOfUsers] = useState([]);
+    const [userId, setUserId] = useState("");
+    const [userType, setUserType,] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+
+    useEffect(() => {
+        Axios.get("http://localhost:5000/getUsers").then((response) => {
+            setListOfUsers(response.data);
+        });
+    }, []);
 
     async function loginUser(event) {
         event.preventDefault()
-        // Axios.post('http://localhost:3001/api/login', {
-        const response = await fetch('http://localhost:3001/api/login', {
+        // Axios.post('http://localhost:5000/api/login', {
+        const response = await fetch('http://localhost:5000/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -27,13 +38,13 @@ function LogIn() {
         if (data.user) {
             localStorage.setItem('token', data.user)
             alert('Login successful')
-            // if (user.userType === admin) {
-            window.location.href = '/admin'
-            // } else if (user.userType === intern) {
-            //     window.location.href = '/user'
-            // } else {
-            //     alert('No content to show for this user')
-            // }
+            if (data.userType === "admin") {
+                window.location.href = '/admin'
+            } else if (data.userType === "intern") {
+                window.location.href = '/user'
+            } else {
+                alert('No content to show for this user')
+            }
         } else {
             alert('Please check your username and password')
         }
@@ -42,7 +53,7 @@ function LogIn() {
 
     // incomplete
     // const logIn = () => {
-    //     Axios.post("http://localhost:3001/api/login", {
+    //     Axios.post("http://localhost:5000/api/login", {
     //         email,
     //         password,
     //     })

@@ -4,20 +4,15 @@ import Axios from "axios";
 
 function AddUser() {
 
-    // temporary
-    const [userId, setUserId] = useState("");
-
-    const [userType, setUserType,] = useState("");
-
     const [listOfUsers, setListOfUsers] = useState([]);
+    const [userType, setUserType,] = useState("intern");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const createUser = () => {
-        Axios.post("http://localhost:3001/createUser", {
-            userId,
+        Axios.post("http://localhost:5000/createUser", {
             userType,
             firstName,
             lastName,
@@ -27,7 +22,6 @@ function AddUser() {
             setListOfUsers([
                 ...listOfUsers,
                 {
-                    userId,
                     userType,
                     firstName,
                     lastName,
@@ -46,28 +40,6 @@ function AddUser() {
                     <Col xs={6} md={6} lg={6} >
                         <Card body>
                             <Form>
-                                <Form.Control className="mb-2"
-                                    type="text"
-                                    placeholder="userId"
-                                    onChange={(event) => {
-                                        setUserId(event.target.value);
-                                    }}
-                                />
-                                <Form.Group className="mb-2">
-                                    <Form.Label>Select user type</Form.Label>
-                                    {" "}
-                                    <select
-                                        required={true}
-                                        onChange={(event) => {
-                                            setUserType(event.target.value);
-                                        }}
-                                    >
-                                        <option></option>
-                                        <option value="intern">intern</option>
-                                        <option value="admin">admin</option>
-                                    </select>
-                                </Form.Group>
-
                                 <Form.Group className="mb-2">
                                     <Form.Label>Name</Form.Label>
                                     <Form.Control className="mb-2"

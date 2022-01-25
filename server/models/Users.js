@@ -2,13 +2,8 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
   {
-    userId: {
-      type: String,
-      // required: true,
-      unique: true,
-    },
     userType: {
-      // here specify if admin or intern
+      // admin or intern
       type: String,
       required: true,
     },

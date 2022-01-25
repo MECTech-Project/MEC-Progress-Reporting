@@ -14,23 +14,11 @@ mongoose.connect(
     "mongodb+srv://makeyourguess:xKiiLdwECEYWr9Zi@cluster0.txzcl.mongodb.net/mec-reports?retryWrites=true&w=majority"
 );
 
-// old way
-// app.post("/createUser", async (req, res) => {
-//     const user = req.body;
-//     const newUser = new UserModel(user);
-//     await newUser.save();
-
-//     res.json(user)
-// });
-
 app.post('/createUser', async (req, res) => {
     console.log(req.body)
-    // const user = req.body;
-    // const newUser = new UserModel(user);
     try {
         const newPassword = await bcrypt.hash(req.body.password, 10)
         await UserModel.create({
-            userId: req.body.userId,
             userType: req.body.userType,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -39,7 +27,7 @@ app.post('/createUser', async (req, res) => {
         })
         res.json({ status: 'ok' })
     } catch (err) {
-        res.json({ status: 'error', error: 'Duplicate email' })
+        res.json({ status: 'error', error: 'Error, figure it out!' })
     }
 })
 
@@ -56,11 +44,9 @@ app.post('/createUser', async (req, res) => {
 //     }
 // })
 
-
 app.post('/api/login', async (req, res) => {
     const user = await UserModel.findOne({
         email: req.body.email,
-        // password: req.body.password,
     })
     if (!user) {
         return { status: 'error', error: 'Invalid login' }
@@ -84,17 +70,11 @@ app.post('/api/login', async (req, res) => {
     }
 })
 
-// not functional yet
-app.delete("/deleteUser", (req, res) => {
-    const user = req.body;
-    UserModel.deleteOne(user, (err, result) => {
-        if (err) {
-            res.json(err)
-        } else {
-            res.json(result)
-        }
-    })
-})
+app.delete('/deleteUser/:id', async (req, res) => {
+    const id = req.params.id
+    await UserModel.findByIdAndRemove(id).exec()
+    res.send("item deleted");
+});
 
 app.get("/getUsers", (req, res) => {
     UserModel.find({}, (err, result) => {
@@ -106,6 +86,6 @@ app.get("/getUsers", (req, res) => {
     });
 });
 
-app.listen(3001, () =>
-    console.log('Server is running on port (3001)')
+app.listen(5000, () =>
+    console.log('Server is running on port (5000)')
 );
