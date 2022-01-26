@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Form, Button, Row, Col, Card, Container } from 'react-bootstrap';
 import Axios from "axios";
 
+// import { LoginContext, UserTypeContext } from '../Helper/Context';
+
 function AddUser() {
+
+    // const { loggedIn, setLoggedIn } = useContext(LoginContext);
+    // const { userType, setUserType } = useContext(UserTypeContext);
 
     const [listOfUsers, setListOfUsers] = useState([]);
     const [userType, setUserType,] = useState("intern");
@@ -92,6 +97,10 @@ function AddUser() {
                     </Col>
                 </Row>
             </Container>
+
+            {/* <button onClick={() => setLoggedIn(true)}> click here</button>
+            {loggedIn ? <h1> ON </h1> : <h1> OFF </h1>} */}
+
         </div>
     )
 }

@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Form, Button, Row, Col, Card, Container } from 'react-bootstrap';
+
 import Axios from "axios";
+
+// import { LoginContext, setLoggedIn } from '../Helper/Context';
 
 function LogIn() {
 
+    // const { loggedIn, setLoggedIn } = useContext(LoginContext);
+    // const { userType, setUserType } = useContext(UserTypeContext);
+
     const [listOfUsers, setListOfUsers] = useState([]);
-    const [userId, setUserId] = useState("");
-    const [userType, setUserType,] = useState("");
+
     const [firstName, setFirstName] = useState("");
+    const [userType, setuserType] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -38,9 +44,10 @@ function LogIn() {
         if (data.user) {
             localStorage.setItem('token', data.user)
             alert('Login successful')
-            if (data.userType === "admin") {
+            alert(data.user)
+            if (userType === "admin") {
                 window.location.href = '/admin'
-            } else if (data.userType === "intern") {
+            } else if (userType === "intern") {
                 window.location.href = '/user'
             } else {
                 alert('No content to show for this user')
@@ -100,6 +107,9 @@ function LogIn() {
                     </Col>
                 </Row>
             </Container>
+
+            {/* <button onClick={() => setLoggedIn(true)}> click here</button>
+            {loggedIn ? <h1> ON </h1> : <h1> OFF </h1>} */}
 
         </div>
     )

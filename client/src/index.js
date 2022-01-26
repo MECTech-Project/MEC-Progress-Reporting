@@ -1,29 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
-import LogIn from './Components/LogIn';
-import NavBar from './Components/NavBar';
-import Admindashboard from './Components/Admindashboard';
-import UserDashboard from './Components/UserDashboard';
-import './Styles/UserDashboard.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <div>
-      <Router>
-        <NavBar />
-
-        <Routes>
-          <Route path="/login" element={<LogIn />} />
-          <Route path="/admin" element={<Admindashboard />} />
-          <Route path="/user" element={<UserDashboard />} />
-        </Routes>
-      </Router>
-    </div>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

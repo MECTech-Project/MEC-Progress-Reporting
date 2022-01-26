@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Card, Button, Col } from "react-bootstrap";
 import UsersAdmin from './UsersAdmin'
 import Axios from "axios";
 
+// import { LoginContext, UserTypeContext } from '../Helper/Context';
+
 function UsersIcons() {
+
+  // const { loggedIn, setLoggedIn } = useContext(LoginContext);
+  // const { userType, setUserType } = useContext(UserTypeContext);
+
 
   // incomplete
   const [listOfUsers, setListOfUsers] = useState([]);
@@ -58,7 +64,7 @@ function UsersIcons() {
                 <Card border="dark" style={{ backgroundColor: '#c097c5' }}>
                   <Card.Body className="text-center">
                     <Card.Title>
-                      {/* {user._id}. */} 
+                      {/* {user._id}. */}
                       {user.firstName} {user.lastName}
                     </Card.Title>
                     <hr />
@@ -81,6 +87,10 @@ function UsersIcons() {
       }
 
       {showResults.UsersAdmin ? <UsersAdmin /> : null}
+
+      {/* <button onClick={() => setLoggedIn(true)}> click here</button>
+      {loggedIn ? <h1> ON </h1> : <h1> OFF </h1>} */}
+
     </div>
   )
 }
